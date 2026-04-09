@@ -40,7 +40,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: var(--navy);
+  background: var(--ink);
   color: var(--white);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
