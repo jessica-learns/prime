@@ -148,10 +148,7 @@ body {
   line-height: 1;
   margin-bottom: 8px;
 }
-.card:nth-child(1) .card-number { color: var(--coral); }
-.card:nth-child(2) .card-number { color: var(--teal-light); }
-.card:nth-child(3) .card-number { color: var(--coral-light); }
-.card:nth-child(4) .card-number { color: var(--teal-pale); }
+.card .card-number { color: var(--teal-light); }
 
 .card-title {
   font-family: var(--font-body);
