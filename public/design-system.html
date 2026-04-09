@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design System — Coral & Teal Investment Platform v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,800;0,900;1,300;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:        #0F1923;
+    --charcoal:   #1C2733;
+    --graphite:   #2E3B48;
+    --slate:      #4A5968;
+    --pewter:     #6B7A8A;
+    --silver:     #8E9CAB;
+    --ash:        #B3BEC9;
+    --mist:       #D4DBE1;
+    --cloud:      #E9EDF1;
+    --frost:      #F2F4F7;
+    --snow:       #F8F9FB;
+    --white:      #FFFFFF;
+
+    --teal-deep:  #004E60;
+    --teal:       #016B83;
+    --teal-mid:   #0891B2;
+    --teal-light: #36B5CE;
+    --teal-pale:  #A5E0ED;
+    /* — LIGHT SURFACES — */
+    --teal-wash:  #D5DCE2;  /* Steel — muted blue-grey, sits between Mist and Cloud */
+
+    --coral-deep: #C4341A;
+    --coral:      #ED5E11;
+    --coral-mid:  #FE6B18;
+    --coral-light:#FF8F50;
+    --coral-pale: #FFDAC5;
+    --coral-wash: #FFF3EC;
+
+    --navy:       #112231;
+    --navy-mid:   #1E3448;
+    --navy-light: #2C4A62;
+
+    --font-display:   'Poppins', 'Helvetica Neue', sans-serif;
+    --font-subtitle:  'Instrument Serif', Georgia, serif;
+    --font-heading:   'Poppins', 'Helvetica Neue', sans-serif;
+    --font-body:      'Poppins', system-ui, sans-serif;
+
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+    --sp-9: 96px; --sp-10: 128px;
+
+    --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 20px;
+
+    /* ── MOTION TOKENS ── */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --duration-instant: 100ms;
+    --duration-fast: 200ms;
+    --duration-normal: 350ms;
+    --duration-slow: 500ms;
+    --duration-dramatic: 800ms;
+
+    --stagger-step: 60ms;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--snow);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .section { padding: var(--sp-9) var(--sp-7); }
+  .section-inner { max-width: 1120px; margin: 0 auto; }
+  .section--light { background: var(--white); }
+  .section--frost { background: var(--frost); }
+  .section--cloud { background: var(--cloud); }
+  .section--teal-wash { background: var(--teal-wash); }
+  .section--navy  { background: var(--navy); color: var(--cloud); }
+  .section--ink   { background: var(--ink); color: var(--cloud); }
+
+  .cover {
+    background: var(--ink);
+    color: var(--cloud);
+    padding: var(--sp-10) var(--sp-7) var(--sp-9);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -10%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(237,94,17,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: -5%;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(1,107,131,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--coral-light);
+    margin-bottom: var(--sp-5);
+    position: relative;
+  }
+  .cover-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 84px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--white);
+    position: relative;
+  }
+  .cover-title em {
+    font-family: var(--font-subtitle);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--coral-light);
+  }
+  .cover-sub {
+    font-family: var(--font-subtitle);
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--frost);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .cover-divider {
+    width: 48px;
+    height: 3px;
+    background: radial-gradient(circle, var(--coral) 1px, transparent 1px);
+    background-size: 7px 3px;
+    margin: var(--sp-6) auto;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .section-number {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--mist);
+    line-height: 1;
+    margin-bottom: var(--sp-2);
+  }
+  .section--navy .section-number,
+  .section--ink .section-number { color: var(--navy-light); }
+
+  .section-label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: var(--sp-3);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    margin-bottom: var(--sp-5);
+  }
+  .section-title em {
+    font-family: var(--font-subtitle);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--coral);
+  }
+
+  .type-grid { display: grid; gap: var(--sp-7); }
+  .type-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--sp-5);
+    align-items: baseline;
+    padding-bottom: var(--sp-6);
+    border-bottom: 1px solid var(--cloud);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-meta {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--pewter);
+    font-weight: 500;
+    padding-top: 6px;
+  }
+  .type-meta span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--slate);
+    margin-top: 4px;
+    font-weight: 300;
+  }
+
+  .demo-label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+  .demo-display {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 78px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+  .demo-display em {
+    font-family: var(--font-subtitle);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--coral);
+  }
+  .demo-h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+  }
+  .demo-h2 {
+    font-family: var(--font-subtitle);
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 400;
+    line-height: 1.35;
+    font-style: italic;
+  }
+  .demo-h3 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--graphite);
+  }
+  .demo-h4 {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--charcoal);
+  }
+  .demo-subhead {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--slate);
+    font-style: italic;
+  }
+  .demo-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--slate);
+    max-width: 600px;
+  }
+  .demo-caption {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--pewter);
+  }
+
+  .mixed-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .mixed-headline em {
+    font-family: var(--font-subtitle);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--coral);
+    font-size: 1.1em;
+  }
+
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--sp-3);
+  }
+  .swatch { text-align: center; }
+  .swatch-color {
+    width: 100%; aspect-ratio: 1;
+    border-radius: var(--r-lg);
+    border: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: var(--sp-2);
+  }
+  .swatch-name {
+    font-family: var(--font-heading);
+    font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--graphite);
+    font-weight: 500;
+  }
+  .swatch-hex {
+    font-family: var(--font-body);
+    font-size: 11px; color: var(--pewter); margin-top: 2px;
+    font-weight: 300;
+  }
+
+  .contrast-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--sp-4);
+  }
+  .contrast-table th {
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--pewter);
+    text-align: left;
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 2px solid var(--cloud);
+  }
+  .contrast-table td {
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--cloud);
+    color: var(--slate);
+    vertical-align: middle;
+    font-weight: 400;
+  }
+  .contrast-sample {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: var(--r-sm);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .num-list { display: grid; gap: var(--sp-7); }
+  .num-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--sp-5);
+    align-items: start;
+  }
+  .num-item-number {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--mist);
+    line-height: 1;
+  }
+  .section--navy .section-label,
+  .section--ink .section-label { color: var(--coral-light); }
+  .section--navy .section-title em,
+  .section--ink .section-title em { color: var(--coral-light); }
+
+  .section--navy .num-item-number,
+  .section--ink .num-item-number { color: var(--navy-light); }
+  .num-item-title {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: var(--sp-2);
+  }
+  .section--navy .num-item-title,
+  .section--ink .num-item-title { color: var(--cloud); }
+  .num-item-text {
+    font-family: var(--font-body);
+    font-size: 14px; line-height: 1.7; color: var(--pewter);
+    font-weight: 300;
+  }
+  .section--navy .num-item-text,
+  .section--ink .num-item-text { color: var(--ash); }
+
+  .arrow-list { display: grid; gap: 0; }
+  .arrow-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp-4) 0;
+    border-bottom: 1px solid var(--cloud);
+    text-decoration: none;
+    color: var(--charcoal);
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  .arrow-link:hover { padding-left: var(--sp-3); }
+  .arrow-link:hover .arrow-link-icon { transform: translateX(4px); }
+  .arrow-link-label {
+    font-family: var(--font-heading);
+    font-size: 14px; font-weight: 500;
+  }
+  .arrow-link-desc {
+    font-family: var(--font-subtitle);
+    font-size: 15px; font-style: italic; color: var(--pewter); margin-left: var(--sp-4);
+  }
+  .arrow-link-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--coral);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--white);
+    transition: transform 0.25s ease; flex-shrink: 0;
+  }
+
+  .check-list { display: grid; gap: var(--sp-3); }
+  .check-item { display: flex; align-items: flex-start; gap: var(--sp-3); }
+  .check-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; color: var(--teal); }
+  .check-text { font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: var(--slate); font-weight: 400; }
+
+  .slash-list {
+    font-family: var(--font-heading);
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--pewter);
+    display: flex; flex-wrap: wrap; align-items: center;
+    font-weight: 500;
+  }
+  .slash-list span { padding: 0 var(--sp-4); }
+  .slash-list span:first-child { padding-left: 0; }
+  .slash-sep { color: var(--silver); }
+
+  .button-cta {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    font-family: var(--font-heading);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--coral);
+    border: none; border-radius: var(--r-md);
+    padding: 14px 28px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .button-cta:hover { background: var(--coral-deep); transform: translateY(-1px); }
+  .button-cta--outline {
+    background: transparent;
+    border: 2px solid var(--coral);
+    color: var(--coral);
+  }
+  .button-cta--outline:hover { background: var(--coral); color: var(--white); }
+  .button-cta--teal {
+    background: var(--teal);
+  }
+  .button-cta--teal:hover { background: var(--teal-deep); }
+
+  .icon-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--coral-light);
+    border: none; cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+  .icon-btn:hover { background: var(--charcoal); }
+  .icon-btn svg { width: 18px; height: 18px; }
+
+  .expand-list { display: grid; gap: 0; }
+  .expand-item { padding: var(--sp-4) 0; border-bottom: 1px solid var(--cloud); cursor: pointer; }
+  .expand-header { display: flex; justify-content: space-between; align-items: center; }
+  .expand-title { font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--charcoal); }
+  .expand-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .expand-icon svg { width: 16px; height: 16px; color: var(--white); stroke-width: 2.5; }
+
+  .tag {
+    font-family: var(--font-heading);
+    font-size: 11px; letter-spacing: 1px; font-weight: 500;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    transition: all 0.2s var(--ease-out-quart);
+  }
+  .tag--coral { background: var(--coral-wash); color: var(--coral-deep); }
+  .tag--coral:hover { background: var(--coral-pale); }
+  .tag--coral-active { background: var(--coral); color: var(--white); }
+  .tag--coral-active:hover { background: var(--coral-deep); }
+  .tag--teal { background: var(--teal-wash); color: var(--teal-deep); }
+  .tag--teal:hover { background: var(--teal-pale); }
+  .tag--muted { background: var(--frost); color: var(--slate); }
+  .tag--muted:hover { background: var(--cloud); }
+
+  .grid-demo { display: grid; gap: var(--sp-5); }
+  .grid-asyml { grid-template-columns: 1.4fr 1fr; }
+  .grid-3col  { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-cell {
+    background: var(--frost);
+    border-radius: var(--r-lg);
+    padding: var(--sp-7) var(--sp-6);
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    min-height: 240px;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .grid-cell--accent {
+    background: var(--navy-mid);
+    color: var(--cloud);
+    border: 1px solid var(--navy-light);
+  }
+  .grid-cell--teal   { background: var(--teal-wash); }
+  .grid-cell--tall   { min-height: 300px; grid-row: span 2; }
+
+  .grid-cell-label {
+    font-family: var(--font-heading);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--pewter); margin-bottom: var(--sp-2);
+  }
+  .grid-cell--accent .grid-cell-label { color: var(--coral-light); }
+  .grid-cell--teal .grid-cell-label { color: var(--coral-deep); }
+  .grid-cell-title {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 900; line-height: 1.2;
+  }
+  .grid-cell-title em {
+    font-family: var(--font-subtitle);
+    font-style: italic; font-weight: 400;
+    color: var(--coral);
+  }
+  .grid-cell--accent .grid-cell-title { color: var(--white); }
+  .grid-cell--accent .grid-cell-title em { color: var(--coral-light); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); }
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r-lg);
+    padding: var(--sp-7) var(--sp-5);
+    text-align: center;
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 40px; font-weight: 900; line-height: 1;
+    margin-bottom: var(--sp-2);
+    color: var(--white);
+  }
+  .stat-unit {
+    font-family: var(--font-heading);
+    font-size: 10px; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--teal-light);
+  }
+
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--sp-5); text-align: center;
+  }
+  .icon-demo { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); }
+  .icon-circle {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 1.5px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--teal);
+  }
+  .icon-circle svg { width: 20px; height: 20px; }
+  .icon-name {
+    font-family: var(--font-heading);
+    font-size: 9px; letter-spacing: 2px; font-weight: 500;
+    text-transform: uppercase; color: var(--pewter);
+  }
+
+  .strip {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    height: 48px; border-radius: var(--r-lg); overflow: hidden;
+    margin-top: var(--sp-5);
+  }
+  .strip div {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
+  }
+
+  .divider {
+    width: 48px; height: 3px; margin: var(--sp-6) 0; border-radius: 2px;
+    background: radial-gradient(circle, var(--coral) 1px, transparent 1px);
+    background-size: 7px 3px;
+  }
+  .section--navy .divider,
+  .section--ink .divider {
+    background: radial-gradient(circle, var(--teal-mid) 1px, transparent 1px);
+    background-size: 7px 3px;
+    opacity: 0.5;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-7); }
+
+  .surface-card {
+    border-radius: var(--r-lg);
+    padding: var(--sp-6);
+    min-height: 260px;
+  }
+  .surface-card-label {
+    font-family: var(--font-heading);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: var(--sp-3);
+  }
+  .surface-card-title {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: var(--sp-3);
+  }
+  .surface-card-subtitle {
+    font-family: var(--font-subtitle);
+    font-size: 18px; font-style: italic;
+    line-height: 1.4;
+    margin-bottom: var(--sp-4);
+  }
+  .surface-card-body {
+    font-family: var(--font-body);
+    font-size: 14px; line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── MOTION DEMO STYLES ── */
+  .motion-token-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--sp-5);
+    align-items: center;
+    padding: var(--sp-4) 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .motion-token-grid:last-child { border-bottom: none; }
+
+  .motion-bar-track {
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .motion-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 3px;
+    width: 0;
+  }
+  .motion-bar-track:hover .motion-bar-fill,
+  .motion-bar-track.playing .motion-bar-fill {
+    width: 100%;
+  }
+
+  .motion-demo-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--r-lg);
+    padding: var(--sp-6);
+    text-align: center;
+    position: relative;
+  }
+
+  .motion-live-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-md);
+    margin: 0 auto var(--sp-4);
+  }
+
+  /* Interactive easing demos */
+  .easing-demo-container {
+    position: relative;
+    height: 64px;
+    margin: var(--sp-3) 0;
+    cursor: pointer;
+  }
+  .easing-demo-track {
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-50%);
+  }
+  .easing-demo-dot {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition-property: left;
+  }
+  .easing-demo-container:hover .easing-demo-dot,
+  .easing-demo-container.playing .easing-demo-dot {
+    left: 100%;
+  }
+
+  /* Stagger demo */
+  .stagger-demo {
+    display: flex;
+    gap: var(--sp-2);
+    justify-content: center;
+    align-items: flex-end;
+    height: 80px;
+    cursor: pointer;
+  }
+  .stagger-bar {
+    width: 24px;
+    border-radius: var(--r-sm) var(--r-sm) 0 0;
+    transform-origin: bottom;
+    transform: scaleY(0.15);
+    opacity: 0.3;
+  }
+  .stagger-demo:hover .stagger-bar,
+  .stagger-demo.playing .stagger-bar {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  /* Scroll reveal demo */
+  .reveal-demo-container {
+    position: relative;
+    height: 100px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .reveal-demo-item {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 30px);
+    opacity: 0;
+    transition-property: transform, opacity;
+  }
+  .reveal-demo-container:hover .reveal-demo-item,
+  .reveal-demo-container.playing .reveal-demo-item {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .section { padding: var(--sp-7) var(--sp-5); }
+    .type-row { grid-template-columns: 1fr; gap: var(--sp-3); }
+    .grid-asyml, .grid-3col { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .num-item { grid-template-columns: 48px 1fr; }
+    .strip { grid-template-columns: repeat(3, 1fr); height: auto; }
+    .strip div { padding: 12px; }
+    .motion-token-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-label">Orange & Teal</div>
+  <h1 class="cover-title">Good design <em>improves</em> communication</h1>
+  <div class="cover-divider"></div>
+  <p class="cover-sub">Where conviction meets clarity in every pixel</p>
+  <div style="margin-top:var(--sp-5);">
+    <span class="slash-list" style="justify-content:center;color:var(--ash);">
+      <span>Poppins Black 900</span><span class="slash-sep" style="color:var(--graphite);">·</span>
+      <span>Instrument Serif</span><span class="slash-sep" style="color:var(--graphite);">·</span>
+      <span>Poppins 300 / 500 / 800</span>
+    </span>
+  </div>
+</div>
+
+<!-- ═══ 01 — TYPOGRAPHY ═══ -->
+<div class="section section--light">
+  <div class="section-inner">
+    <div class="section-number">01</div>
+    <div class="section-label">Foundation</div>
+    <h2 class="section-title">Three Fonts, <em>Five Voices</em></h2>
+    <p class="demo-body" style="margin-bottom:var(--sp-5);">Poppins Black (900) is the display font — maximum weight geometric sans with commanding presence at large sizes. Instrument Serif Italic handles subtitles and pull-quotes — elegant and warm between 18px and 32px. Poppins does the structural work in three additional weights: 800 for H1 headings, 500 for H3/H4 and labels, and 300 italic for subheads and body lightness. Poppins 900 and Instrument Serif never appear at the same size.</p>
+
+    <div class="type-grid" style="margin-top:var(--sp-7);">
+      <div class="type-row">
+        <div class="type-meta">Label<span>Poppins 11px<br/>Weight 600<br/>Tracking +4px, All caps</span></div>
+        <div class="demo-label">Investment Research & Analysis</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Display<span>Poppins 78px<br/>Weight 900<br/>Mixed case</span></div>
+        <div class="demo-display">Conviction <em>Meets</em> Clarity</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">H1<span>Poppins 32px<br/>Weight 900<br/>Sentence case</span></div>
+        <div class="demo-h1">Structural Advantage</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">H2 / Subtitle<span>Instrument Serif 30px<br/>Weight 400, Italic</span></div>
+        <div class="demo-h2">Where mispricing lives in plain sight</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">H3<span>Poppins 14px<br/>Weight 600<br/>Tracking +2px, All caps</span></div>
+        <div class="demo-h3">Quarterly Financial Overview</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">H4<span>Poppins 16px<br/>Weight 500<br/>Sentence case</span></div>
+        <div class="demo-h4">Revenue grew 19.5% quarter over quarter</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Subhead<span>Poppins 17px<br/>Weight 300, Italic<br/>Sentence case</span></div>
+        <div class="demo-subhead">The structural thesis depends on whether datacenter capex sustains at $200B+ annually through 2028.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Body<span>Poppins 15px<br/>Weight 400<br/>Line-height 1.75</span></div>
+        <div class="demo-body">Gross margin came in at 75.0% for the January 2026 quarter, reflecting pricing power in the datacenter segment rather than end-use compute. Operating margin held at 65.0%, and net margin reached 63.1%.</div>
+      </div>
+      <div class="type-row">
+        <div class="type-meta">Caption<span>Poppins 10px<br/>Weight 500<br/>Tracking +2.5px, All caps</span></div>
+        <div class="demo-caption">Source: SEC EDGAR Data · As of March 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DUAL SERIF RULE ═══ -->
+<div class="section section--navy">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--coral-light);">Key Rule</div>
+    <h2 class="section-title" style="color:var(--cloud);">Poppins Black <em>Commands,</em> Instrument Serif <em>Narrates</em></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);margin-top:var(--sp-5);">
+      <div>
+        <div class="demo-h3" style="color:var(--coral-light);margin-bottom:var(--sp-3);">Poppins Black — When to Use</div>
+        <div style="font-size:14px;color:var(--ash);line-height:1.7;font-weight:300;">
+          Hero headlines, cover titles, section titles, stat card numbers, and any text at 36px or above. Poppins Black's extreme weight and geometric letterforms create a bold, trustworthy presence. Always use at weight 900. Never below 28px — display weights need room to breathe.
+        </div>
+      </div>
+      <div>
+        <div class="demo-h3" style="color:var(--coral-light);margin-bottom:var(--sp-3);">Instrument Serif — When to Use</div>
+        <div style="font-size:14px;color:var(--ash);line-height:1.7;font-weight:300;">
+          H2 subtitles, pull-quotes, card descriptions, and any editorial text between 18px and 32px. Always in italic. Its refined, classical letterforms contrast beautifully against Poppins Black's geometric weight and Poppins' geometric simplicity. Use at 400 weight only.
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-7);padding-top:var(--sp-6);border-top:1px solid rgba(255,255,255,0.06);">
+      <div class="demo-h3" style="color:var(--ash);margin-bottom:var(--sp-5);">The Three Fonts Together</div>
+      <div style="margin-bottom:var(--sp-5);">
+        <div class="section-label" style="color:var(--coral-light);">Equity Research</div>
+        <div style="font-family:var(--font-display);font-size:48px;font-weight:900;line-height:1.1;color:var(--white);">NVIDIA's Datacenter <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-light);">Dominance</span></div>
+        <div style="font-family:var(--font-body);font-size:17px;font-weight:300;font-style:italic;line-height:1.55;color:var(--ash);margin-top:var(--sp-3);max-width:640px;">Why 75% gross margins are structural, not cyclical — and what the market is missing about inference demand</div>
+        <div style="font-family:var(--font-body);font-size:14px;color:var(--ash);margin-top:var(--sp-4);line-height:1.7;max-width:600px;font-weight:300;">Revenue grew 19.5% quarter over quarter to $39.3B, with datacenter accounting for 88% of total. The gross margin story is pricing power in the training stack.</div>
+      </div>
+
+      <div style="margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid rgba(255,255,255,0.06);">
+        <div class="demo-h3" style="color:var(--coral-light);margin-bottom:var(--sp-3);">Three Voices Maximum</div>
+        <div style="font-size:14px;color:var(--ash);line-height:1.7;font-weight:300;max-width:640px;">
+          No text block should use more than three typographic voices — one display, one supporting, one body. In the example above: Poppins Black + coral Instrument Serif (display), Poppins 300 italic (supporting), and Poppins 400 (body). Instrument Serif italic should appear in only one color per text block — never stack a coral serif headline directly above a teal serif subtitle. If the headline uses Instrument Serif in coral, the subtitle drops to Poppins 300 italic in a neutral.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MIXED HEADLINE ═══ -->
+<div class="section section--ink">
+  <div class="section-inner">
+    <div class="section-label" style="color:var(--coral-light);">Signature Pattern</div>
+    <h2 class="section-title" style="color:var(--cloud);">The Mixed <em>Headline</em></h2>
+    <p style="font-size:14px;color:var(--ash);max-width:540px;line-height:1.7;margin-bottom:var(--sp-7);font-weight:300;">Italic Instrument Serif connector words soften the weight of Poppins 800. The italic word is always a preposition, conjunction, or article — never the power word.</p>
+    <div style="display:grid;gap:var(--sp-7);">
+      <div class="mixed-headline" style="color:var(--white);">Designed <em>to</em> Stand Out</div>
+      <div class="mixed-headline" style="color:var(--white);">Conviction <em>meets</em> Clarity</div>
+      <div class="mixed-headline" style="color:var(--white);">Research <em>for the</em> Modern Investor</div>
+      <div class="mixed-headline" style="color:var(--white);">Your Portfolio & <em>Your</em> Perspective</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 02 — PALETTE + CONTRAST ═══ -->
+<div class="section section--light">
+  <div class="section-inner">
+    <div class="section-number">02</div>
+    <div class="section-label">Palette</div>
+    <h2 class="section-title">The 75/20/5 <em>Color System</em></h2>
+    <p class="demo-body" style="margin-bottom:var(--sp-5);">75% cool neutrals ground the system. 20% teal provides the secondary voice — used sparingly for icons, supporting UI, and secondary buttons. 5% coral carries all the energy — labels, primary CTAs, and accent moments. This ratio ensures coral pops without overwhelming, and teal stays structural rather than dominant.</p>
+
+    <div class="demo-h3" style="margin-top:var(--sp-5);margin-bottom:var(--sp-3);">Neutrals — 75%</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--ink)"></div><div class="swatch-name">Ink</div><div class="swatch-hex">#0F1923</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--charcoal)"></div><div class="swatch-name">Charcoal</div><div class="swatch-hex">#1C2733</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--graphite)"></div><div class="swatch-name">Graphite</div><div class="swatch-hex">#2E3B48</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--slate)"></div><div class="swatch-name">Slate</div><div class="swatch-hex">#4A5968</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--pewter)"></div><div class="swatch-name">Pewter</div><div class="swatch-hex">#6B7A8A</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--silver)"></div><div class="swatch-name">Silver</div><div class="swatch-hex">#8E9CAB</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--ash)"></div><div class="swatch-name">Ash</div><div class="swatch-hex">#B3BEC9</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--mist)"></div><div class="swatch-name">Mist</div><div class="swatch-hex">#D4DBE1</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--cloud)"></div><div class="swatch-name">Cloud</div><div class="swatch-hex">#E9EDF1</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--frost)"></div><div class="swatch-name">Frost</div><div class="swatch-hex">#F2F4F7</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--snow)"></div><div class="swatch-name">Snow</div><div class="swatch-hex">#F8F9FB</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--white)"></div><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div>
+    </div>
+
+    <div class="demo-h3" style="margin-top:var(--sp-5);margin-bottom:var(--sp-3);">Secondary: Teal — 20%</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--teal-deep)"></div><div class="swatch-name">Teal Deep</div><div class="swatch-hex">#004E60</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--teal)"></div><div class="swatch-name">Teal</div><div class="swatch-hex">#016B83</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--teal-mid)"></div><div class="swatch-name">Teal Mid</div><div class="swatch-hex">#0891B2</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--teal-light)"></div><div class="swatch-name">Teal Light</div><div class="swatch-hex">#36B5CE</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--teal-pale)"></div><div class="swatch-name">Teal Pale</div><div class="swatch-hex">#A5E0ED</div></div>
+    </div>
+
+    <div class="demo-h3" style="margin-top:var(--sp-5);margin-bottom:var(--sp-3);">Accent: Coral — 5%</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--coral-deep)"></div><div class="swatch-name">Coral Deep</div><div class="swatch-hex">#C4341A</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--coral)"></div><div class="swatch-name">Coral</div><div class="swatch-hex">#ED5E11</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--coral-mid)"></div><div class="swatch-name">Coral Mid</div><div class="swatch-hex">#FE6B18</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--coral-light)"></div><div class="swatch-name">Coral Light</div><div class="swatch-hex">#FF8F50</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--coral-pale)"></div><div class="swatch-name">Coral Pale</div><div class="swatch-hex">#FFDAC5</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--coral-wash)"></div><div class="swatch-name">Coral Wash</div><div class="swatch-hex">#FFF3EC</div></div>
+    </div>
+
+    <div class="demo-h3" style="margin-top:var(--sp-5);margin-bottom:var(--sp-3);">Dark Surfaces — Section Backgrounds</div>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--navy)"></div><div class="swatch-name">Navy</div><div class="swatch-hex">#112231</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--navy-mid)"></div><div class="swatch-name">Navy Mid</div><div class="swatch-hex">#1E3448</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--navy-light)"></div><div class="swatch-name">Navy Light</div><div class="swatch-hex">#2C4A62</div></div>
+    </div>
+
+    <div class="demo-h3" style="margin-top:var(--sp-5);margin-bottom:var(--sp-3);">Light Surfaces — Section Backgrounds</div>
+    <p style="font-size:14px;color:var(--slate);line-height:1.7;font-weight:300;max-width:600px;margin-bottom:var(--sp-3);">Four approved light backgrounds for full-width sections. Steel is a muted blue-grey that sits between Mist and Cloud — use it to break up neutral monotony without introducing saturated color. Alternate these with dark surfaces to create visual rhythm.</p>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--white);border:1px solid var(--cloud);"></div><div class="swatch-name">White</div><div class="swatch-hex">#FFFFFF</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--frost)"></div><div class="swatch-name">Frost</div><div class="swatch-hex">#F2F4F7</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--cloud)"></div><div class="swatch-name">Cloud</div><div class="swatch-hex">#E9EDF1</div></div>
+      <div class="swatch"><div class="swatch-color" style="background:var(--teal-wash)"></div><div class="swatch-name">Steel</div><div class="swatch-hex">#D5DCE2</div></div>
+    </div>
+
+    <div style="margin-top:var(--sp-7);padding-top:var(--sp-6);border-top:1px solid var(--cloud);">
+      <div class="demo-h3" style="margin-bottom:var(--sp-2);">Contrast Pairing Rules</div>
+      <p class="demo-body" style="margin-bottom:var(--sp-4);">All informational text must meet WCAG AA minimum contrast: <strong style="color:var(--charcoal);">4.5:1 for small text</strong> (&lt;24px) and <strong style="color:var(--charcoal);">3:1 for large text</strong> (24px+ or 19px+ bold). Decorative elements like ghosted section numbers are exempt. Silver and Ash fail on light surfaces and must never carry body text there.</p>
+
+      <table class="contrast-table">
+        <thead>
+          <tr><th>Surface</th><th>Body Text (4.5:1)</th><th>Large Text (3:1)</th><th>Decorative / Numbers</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="contrast-sample" style="background:var(--white);color:var(--graphite);border:1px solid var(--cloud);">White</span></td>
+            <td>Ink, Charcoal, Graphite, Slate</td>
+            <td>+ Pewter</td>
+            <td>Pewter or darker</td>
+          </tr>
+          <tr>
+            <td><span class="contrast-sample" style="background:var(--frost);color:var(--graphite);">Frost</span></td>
+            <td>Ink, Charcoal, Graphite, Slate</td>
+            <td>+ Pewter</td>
+            <td>Pewter or darker</td>
+          </tr>
+          <tr>
+            <td><span class="contrast-sample" style="background:var(--cloud);color:var(--graphite);">Cloud</span></td>
+            <td>Ink, Charcoal, Graphite</td>
+            <td>+ Slate</td>
+            <td>Slate or darker</td>
+          </tr>
+          <tr>
+            <td><span class="contrast-sample" style="background:var(--teal-wash);color:var(--ink);">Steel</span></td>
+            <td>Ink, Charcoal, Graphite</td>
+            <td>+ Slate</td>
+            <td>Slate or darker</td>
+          </tr>
+          <tr>
+            <td><span class="contrast-sample" style="background:var(--navy);color:var(--cloud);">Navy</span></td>
+            <td>White, Cloud, Frost, Ash</td>
+            <td>+ Mist, Teal Pale</td>
+            <td>Navy Light or lighter</td>
+          </tr>
+          <tr>
+            <td><span class="contrast-sample" style="background:var(--ink);color:var(--cloud);">Ink</span></td>
+            <td>White, Cloud, Frost, Ash</td>
+            <td>+ Mist, Teal Light, Coral Light</td>
+            <td>Navy Light or lighter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="demo-h3" style="margin-top:var(--sp-5);margin-bottom:var(--sp-3);">Section Rhythm — Never Two Alike in a Row</div>
+    <div class="strip">
+      <div style="background:var(--white);color:var(--pewter);">White</div>
+      <div style="background:var(--navy);color:var(--ash);">Navy</div>
+      <div style="background:var(--frost);color:var(--pewter);">Frost</div>
+      <div style="background:var(--ink);color:var(--ash);">Ink</div>
+      <div style="background:var(--teal-wash);color:var(--ink);">Steel</div>
+      <div style="background:var(--cloud);color:var(--slate);">Cloud</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SURFACE PAIRINGS ═══ -->
+<div class="section section--frost">
+  <div class="section-inner">
+    <div class="section-number">03</div>
+    <div class="section-label">Surface Pairings</div>
+    <h2 class="section-title">Six Approved <em>Combinations</em></h2>
+    <p class="demo-body" style="margin-bottom:var(--sp-7);">Four dark-on-light and two light-on-dark. Each card below shows the exact approved text colors for that surface. No other pairings are allowed.</p>
+
+    <div class="demo-h3" style="margin-bottom:var(--sp-4);">Dark on Light — 4 Options</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin-bottom:var(--sp-7);">
+      <div class="surface-card" style="background:var(--white);border:1px solid var(--cloud);">
+        <div class="surface-card-label" style="color:var(--coral);">On White · #FFFFFF</div>
+        <div class="surface-card-title" style="color:var(--ink);">Poppins Black <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral);">Headlines</span></div>
+        <div class="surface-card-subtitle" style="color:var(--slate);">Instrument Serif subtitles in Slate</div>
+        <div class="surface-card-body" style="color:var(--slate);">Body text in Slate (#4A5968) provides 7.2:1 contrast against white. Graphite (#2E3B48) works for emphasis at 10.3:1. Labels use Coral at 3.6:1 — large text only.</div>
+        <div style="display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--ink);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--graphite);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--slate);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--pewter);border:1px solid var(--mist);"></span>
+          <span style="width:1px;height:16px;background:var(--cloud);margin:0 2px;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--coral-mid);"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--teal-mid);"></span>
+        </div>
+      </div>
+      <div class="surface-card" style="background:var(--frost);">
+        <div class="surface-card-label" style="color:var(--coral);">On Frost · #F2F4F7</div>
+        <div class="surface-card-title" style="color:var(--ink);">Alternating <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral);">Sections</span></div>
+        <div class="surface-card-subtitle" style="color:var(--slate);">Slightly cooler than white, same text rules</div>
+        <div class="surface-card-body" style="color:var(--slate);">Same text pairings as White. Frost creates visual breathing room between white card surfaces and white section backgrounds. Pewter works for decorative numbers only.</div>
+        <div style="display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--ink);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--graphite);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--slate);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--pewter);border:1px solid var(--mist);"></span>
+          <span style="width:1px;height:16px;background:var(--cloud);margin:0 2px;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--coral);"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--teal);"></span>
+        </div>
+      </div>
+      <div class="surface-card" style="background:var(--cloud);">
+        <div class="surface-card-label" style="color:var(--coral);">On Cloud · #E9EDF1</div>
+        <div class="surface-card-title" style="color:var(--ink);">Deeper Gray <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-deep);">Demands</span> Darker Text</div>
+        <div class="surface-card-subtitle" style="color:var(--graphite);">Instrument Serif subtitles in Graphite</div>
+        <div class="surface-card-body" style="color:var(--graphite);">On Cloud, body text moves up to Graphite (#2E3B48) at 7.0:1. Slate is fine for large text at 4.0:1. Pewter fails here — don't use it for text.</div>
+        <div style="display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--ink);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--charcoal);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--graphite);"></span>
+          <span style="width:1px;height:16px;background:var(--ash);margin:0 2px;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--coral-deep);"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--teal-deep);"></span>
+        </div>
+      </div>
+      <div class="surface-card" style="background:var(--teal-wash);">
+        <div class="surface-card-label" style="color:var(--coral-deep);">On Steel · #D5DCE2</div>
+        <div class="surface-card-title" style="color:var(--ink);">Steel <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-deep);">Sections</span></div>
+        <div class="surface-card-subtitle" style="color:var(--charcoal);">Coral Deep for labels, Charcoal for subtitles</div>
+        <div class="surface-card-body" style="color:var(--graphite);">A muted blue-grey surface between Mist and Cloud. Use Coral Deep (#C4341A) for labels and accent elements. Ink and Charcoal for headings, Graphite for body. Same text rules as Cloud.</div>
+        <div style="display:flex;align-items:center;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--ink);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--charcoal);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--graphite);"></span>
+          <span style="width:1px;height:16px;background:var(--silver);margin:0 2px;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--coral-deep);"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--teal-deep);"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-h3" style="margin-bottom:var(--sp-4);">Light on Dark — 2 Options</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);">
+      <div class="surface-card" style="background:var(--navy);">
+        <div class="surface-card-label" style="color:var(--coral-light);">On Navy · #112231</div>
+        <div class="surface-card-title" style="color:var(--white);">Light Text <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-light);">on Navy</span></div>
+        <div class="surface-card-subtitle" style="color:var(--teal-light);">Teal Light for subtitles — 5.8:1 at 22px</div>
+        <div class="surface-card-body" style="color:var(--ash);">Ash (#B3BEC9) is the primary body text at 7.4:1. Coral Light for labels — it passes 3:1 at label size. Teal Light for editorial voices. Never use Silver or Pewter.</div>
+        <div style="display:flex;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--white);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--ash);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--teal-light);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--coral-light);"></span>
+        </div>
+      </div>
+      <div class="surface-card" style="background:var(--ink);">
+        <div class="surface-card-label" style="color:var(--coral-light);">On Ink · #0F1923</div>
+        <div class="surface-card-title" style="color:var(--white);">Maximum <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-light);">Contrast</span></div>
+        <div class="surface-card-subtitle" style="color:var(--teal-light);">Same rules as Navy with even wider range</div>
+        <div class="surface-card-body" style="color:var(--ash);">Ink is darker than Navy, so the same pairings work with even higher ratios. Mist (#D4DBE1) becomes available for large decorative text. Ash remains the body default.</div>
+        <div style="display:flex;gap:var(--sp-3);margin-top:var(--sp-4);">
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--white);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--ash);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--mist);"></span>
+          <span style="width:24px;height:24px;border-radius:50%;background:var(--teal-light);"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 04 — LISTS ═══ -->
+<div class="section section--teal-wash">
+  <div class="section-inner">
+    <div class="section-number" style="color:var(--silver);">04</div>
+    <div class="section-label" style="color:var(--coral-deep);">Components</div>
+    <h2 class="section-title" style="color:var(--ink);">Six Distinct <em style="color:var(--coral-deep);">List</em> Designs</h2>
+
+    <div class="two-col" style="margin-top:var(--sp-5);gap:var(--sp-7);">
+      <div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);color:var(--ink);">A. Leading-Zero Numbered List</div>
+        <div class="demo-caption" style="margin-bottom:var(--sp-3);color:var(--graphite);">Use for: Ordered processes, service tiers</div>
+        <div class="num-list">
+          <div class="num-item">
+            <div class="num-item-number" style="color:var(--mist);">01</div>
+            <div>
+              <div class="num-item-title" style="color:var(--ink);">Thesis Development</div>
+              <div class="num-item-text" style="color:var(--charcoal);">Identify the structural bottleneck or mispricing.</div>
+            </div>
+          </div>
+          <div class="num-item">
+            <div class="num-item-number" style="color:var(--mist);">02</div>
+            <div>
+              <div class="num-item-title" style="color:var(--ink);">Financial Modeling</div>
+              <div class="num-item-text" style="color:var(--charcoal);">Build a quantified view of upside and downside.</div>
+            </div>
+          </div>
+          <div class="num-item">
+            <div class="num-item-number" style="color:var(--mist);">03</div>
+            <div>
+              <div class="num-item-title" style="color:var(--ink);">Risk Mapping</div>
+              <div class="num-item-text" style="color:var(--charcoal);">Surface what could go wrong and what would change the view.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" style="background:radial-gradient(circle, var(--coral-deep) 1px, transparent 1px);background-size:7px 3px;margin:var(--sp-7) 0;"></div>
+
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);color:var(--ink);">B. Arrow Navigation List</div>
+        <div class="demo-caption" style="margin-bottom:var(--sp-3);color:var(--graphite);">Use for: Page links, report sections</div>
+        <div class="arrow-list">
+          <div class="arrow-link" style="border-color:var(--silver);">
+            <div><span class="arrow-link-label" style="color:var(--ink);">Portfolio Overview</span><span class="arrow-link-desc" style="color:var(--graphite);">Current positions</span></div>
+            <span class="arrow-link-icon" style="background:var(--ink);color:var(--coral-light);">→</span>
+          </div>
+          <div class="arrow-link" style="border-color:var(--silver);">
+            <div><span class="arrow-link-label" style="color:var(--ink);">Research Library</span><span class="arrow-link-desc" style="color:var(--graphite);">Investment memos</span></div>
+            <span class="arrow-link-icon" style="background:var(--ink);color:var(--coral-light);">→</span>
+          </div>
+          <div class="arrow-link" style="border-color:var(--silver);">
+            <div><span class="arrow-link-label" style="color:var(--ink);">Market Intelligence</span><span class="arrow-link-desc" style="color:var(--graphite);">Sector themes</span></div>
+            <span class="arrow-link-icon" style="background:var(--ink);color:var(--coral-light);">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);color:var(--ink);">C. Checkmark Feature List</div>
+        <div class="demo-caption" style="margin-bottom:var(--sp-3);color:var(--graphite);">Use for: Feature confirmations, deliverables</div>
+        <div class="check-list">
+          <div class="check-item">
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--coral-deep);"><path d="M5 13l4 4L19 7"/></svg>
+            <span class="check-text" style="color:var(--charcoal);">SEC EDGAR data pipeline — automated quarterly ingestion</span>
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--coral-deep);"><path d="M5 13l4 4L19 7"/></svg>
+            <span class="check-text" style="color:var(--charcoal);">AI-generated research memos with primary-source citations</span>
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--coral-deep);"><path d="M5 13l4 4L19 7"/></svg>
+            <span class="check-text" style="color:var(--charcoal);">Control premium scoring across 5 structural dimensions</span>
+          </div>
+          <div class="check-item">
+            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--coral-deep);"><path d="M5 13l4 4L19 7"/></svg>
+            <span class="check-text" style="color:var(--charcoal);">Custom watchlists with real-time catalyst tracking</span>
+          </div>
+        </div>
+
+        <div class="divider" style="background:radial-gradient(circle, var(--coral-deep) 1px, transparent 1px);background-size:7px 3px;margin:var(--sp-7) 0;"></div>
+
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);color:var(--ink);">D. Slash-Separated Inline List</div>
+        <div class="demo-caption" style="margin-bottom:var(--sp-3);color:var(--graphite);">Use for: Metadata, tag lines, footer nav</div>
+        <div class="slash-list" style="color:var(--ink);">
+          <span>Equities</span><span class="slash-sep" style="color:var(--silver);">·</span>
+          <span>Fixed Income</span><span class="slash-sep" style="color:var(--silver);">·</span>
+          <span>Alternatives</span><span class="slash-sep" style="color:var(--silver);">·</span>
+          <span>Private Credit</span>
+        </div>
+
+        <div class="divider" style="background:radial-gradient(circle, var(--coral-deep) 1px, transparent 1px);background-size:7px 3px;margin:var(--sp-7) 0;"></div>
+
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);color:var(--ink);">E. Plus-Expand List</div>
+        <div class="demo-caption" style="margin-bottom:var(--sp-3);color:var(--graphite);">Use for: FAQ, methodology, risk factors</div>
+        <div class="expand-list">
+          <div class="expand-item" style="border-color:var(--silver);">
+            <div class="expand-header">
+              <span class="expand-title" style="color:var(--charcoal);">How is the control premium calculated?</span>
+              <span class="expand-icon" style="background:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" style="color:var(--coral-light);"><path d="M12 5v14M5 12h14"/></svg></span>
+            </div>
+          </div>
+          <div class="expand-item" style="border-color:var(--silver);">
+            <div class="expand-header">
+              <span class="expand-title" style="color:var(--charcoal);">What data sources power the research?</span>
+              <span class="expand-icon" style="background:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" style="color:var(--coral-light);"><path d="M12 5v14M5 12h14"/></svg></span>
+            </div>
+          </div>
+          <div class="expand-item" style="border-color:var(--silver);">
+            <div class="expand-header">
+              <span class="expand-title" style="color:var(--charcoal);">Can I export reports as PDF?</span>
+              <span class="expand-icon" style="background:var(--ink);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" style="color:var(--coral-light);"><path d="M12 5v14M5 12h14"/></svg></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" style="background:radial-gradient(circle, var(--coral-deep) 1px, transparent 1px);background-size:7px 3px;margin:var(--sp-7) 0;"></div>
+
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">F. Star Rating</div>
+        <div style="display:flex;align-items:center;gap:var(--sp-3);">
+          <div class="star-row" style="color:var(--coral);">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <span style="font-size:13px;color:var(--graphite);font-weight:400;">High conviction</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 05 — GRIDS ═══ -->
+<div class="section section--navy">
+  <div class="section-inner">
+    <div class="section-number">05</div>
+    <div class="section-label" style="color:var(--coral-light);">Layout</div>
+    <h2 class="section-title" style="color:var(--cloud);">Asymmetric <em>Grid</em> Patterns</h2>
+
+    <div class="demo-h3" style="color:var(--ash);margin-bottom:var(--sp-3);">Pattern A — Weighted Two-Column</div>
+    <div class="grid-demo grid-asyml" style="margin-bottom:var(--sp-5);">
+      <div class="grid-cell grid-cell--teal">
+        <div class="grid-cell-label">Featured Analysis</div>
+        <div class="grid-cell-title" style="color:var(--ink);">Quarterly <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-deep);">Revenue</span> Analysis</div>
+        <p style="font-family:var(--font-body);font-size:13px;color:var(--slate);margin-top:var(--sp-3);line-height:1.6;font-weight:300;">Revenue grew 19.5% QoQ to $39.3B, driven by datacenter demand.</p>
+        <a class="button-cta" style="margin-top:var(--sp-3);align-self:flex-start;">Read Full Memo</a>
+      </div>
+      <div class="grid-cell grid-cell--accent">
+        <div class="grid-cell-label">Supporting Data</div>
+        <div class="grid-cell-title" style="color:var(--white);">Margin <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-light);">Trends</span></div>
+        <div style="display:flex;gap:var(--sp-5);margin-top:var(--sp-4);">
+          <div><div style="font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--white);">75.0%</div><div style="font-family:var(--font-heading);font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal-light);">Gross</div></div>
+          <div><div style="font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--white);">65.0%</div><div style="font-family:var(--font-heading);font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal-light);">Operating</div></div>
+          <div><div style="font-family:var(--font-display);font-size:28px;font-weight:900;color:var(--white);">63.1%</div><div style="font-family:var(--font-heading);font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal-light);">Net</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-h3" style="color:var(--ash);margin-top:var(--sp-7);margin-bottom:var(--sp-3);">Pattern B — Three-Column with Tall Card</div>
+    <div class="grid-demo grid-3col" style="margin-bottom:var(--sp-5);">
+      <div class="grid-cell grid-cell--accent grid-cell--tall">
+        <div class="grid-cell-label">Primary</div>
+        <div class="grid-cell-title" style="color:var(--white);">Investment <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-light);">Thesis</span></div>
+        <a class="button-cta" style="margin-top:var(--sp-3);align-self:flex-start;">Read Memo</a>
+      </div>
+      <div class="grid-cell grid-cell--teal">
+        <div class="grid-cell-label" style="color:var(--coral-deep);">Upside</div>
+        <div class="grid-cell-title" style="color:var(--ink);">Catalyst <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral-deep);">Map</span></div>
+      </div>
+      <div class="grid-cell" style="background:var(--frost);">
+        <div class="grid-cell-label">Risk</div>
+        <div class="grid-cell-title" style="color:var(--ink);">What Could <span style="font-family:var(--font-subtitle);font-style:italic;font-weight:400;color:var(--coral);">Go Wrong</span></div>
+      </div>
+    </div>
+
+    <div class="demo-h3" style="color:var(--ash);margin-top:var(--sp-7);margin-bottom:var(--sp-3);">Pattern C — Stat Cards</div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-value">$4.24T</div><div class="stat-unit">Market Cap</div></div>
+      <div class="stat-card"><div class="stat-value">35.7x</div><div class="stat-unit">P/E (TTM)</div></div>
+      <div class="stat-card"><div class="stat-value">75.0%</div><div class="stat-unit">Gross Margin</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 06 — ICONS ═══ -->
+<div class="section section--light">
+  <div class="section-inner">
+    <div class="section-number">06</div>
+    <div class="section-label">Iconography</div>
+    <h2 class="section-title">Double Line <em>Icons</em></h2>
+    <p class="demo-body" style="margin-bottom:var(--sp-5);">Double-weight line icons in teal — never filled, never heavy. Decorative icons in 48px bordered circles. Interactive icon buttons use a solid filled circle at 44px minimum with coral icons.</p>
+    <div class="icon-grid" style="margin-top:var(--sp-5);">
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="icon-name">Arrow</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div><div class="icon-name">Plus</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg></div><div class="icon-name">Check</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="icon-name">Star</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 115.12 2.12c-.58.58-1.12 1-1.12 2.38M12 17h.01"/></svg></div><div class="icon-name">Question</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></div><div class="icon-name">External</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div><div class="icon-name">Chevron</div></div>
+      <div class="icon-demo"><div class="icon-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div><div class="icon-name">Close</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 07 — CTAs ═══ -->
+<div class="section section--cloud">
+  <div class="section-inner">
+    <div class="section-number" style="color:var(--mist);">07</div>
+    <div class="section-label">Interactions</div>
+    <h2 class="section-title">Action & <em>Affordance</em></h2>
+    <div class="two-col" style="margin-top:var(--sp-5);">
+      <div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Primary Button — Coral</div>
+        <a class="button-cta">View Research</a>
+        <div class="divider" style="background:radial-gradient(circle, var(--teal) 1px, transparent 1px);background-size:7px 3px;"></div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Secondary Button — Teal</div>
+        <a class="button-cta button-cta--teal">Learn More</a>
+        <div class="divider" style="background:radial-gradient(circle, var(--teal) 1px, transparent 1px);background-size:7px 3px;"></div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Outline Button</div>
+        <a class="button-cta button-cta--outline">Download Report</a>
+        <div class="divider" style="background:radial-gradient(circle, var(--teal) 1px, transparent 1px);background-size:7px 3px;"></div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Icon Buttons</div>
+        <div style="display:flex;gap:var(--sp-3);align-items:center;">
+          <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+      </div>
+      <div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Inline Tags</div>
+        <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap;">
+          <span class="tag tag--coral">Technology</span>
+          <span class="tag tag--coral-active">Semiconductors</span>
+          <span class="tag tag--teal">Healthcare</span>
+          <span class="tag tag--muted">Financials</span>
+        </div>
+        <div class="divider" style="background:radial-gradient(circle, var(--teal) 1px, transparent 1px);background-size:7px 3px;"></div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Text Link</div>
+        <p class="demo-body" style="color:var(--graphite);">Gross margin came in at 75.0%, reflecting what we discussed in <span style="color:var(--coral);text-decoration:underline;text-underline-offset:3px;cursor:pointer;">our Q3 analysis</span> — pricing power remains the structural driver.</p>
+        <div class="divider" style="background:radial-gradient(circle, var(--teal) 1px, transparent 1px);background-size:7px 3px;"></div>
+        <div class="demo-h3" style="margin-bottom:var(--sp-3);">Metadata Line</div>
+        <div class="slash-list" style="color:var(--graphite);"><span>SEC EDGAR</span><span class="slash-sep">·</span><span>10-K Filing</span><span class="slash-sep">·</span><span>FY2026</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 08 — FUNCTIONAL COLOR ═══ -->
+<div class="section section--ink">
+  <div class="section-inner">
+    <div class="section-number" style="color:var(--navy-light);">08</div>
+    <div class="section-label" style="color:var(--coral-light);">Color Roles</div>
+    <h2 class="section-title" style="color:var(--cloud);">Functional <em>Color</em> Encoding</h2>
+    <p style="font-size:14px;color:var(--ash);max-width:640px;line-height:1.7;margin-bottom:var(--sp-7);font-weight:300;">Coral and teal each serve distinct roles. Mixing them — using teal where coral belongs or vice versa — breaks the visual contract users rely on.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp-4);">
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-lg);padding:var(--sp-6) var(--sp-5);text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--coral);margin:0 auto var(--sp-3);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--font-heading);font-size:16px;color:var(--white);font-weight:900;">Aa</span>
+        </div>
+        <div style="font-family:var(--font-heading);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--coral-light);margin-bottom:var(--sp-2);">Coral — Label + CTA</div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--ash);line-height:1.6;font-weight:300;">Section labels, primary button fills, accent italic words, star ratings. The 5% that carries all the energy.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-lg);padding:var(--sp-6) var(--sp-5);text-align:center;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--teal);margin:0 auto var(--sp-3);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--font-heading);font-size:16px;color:var(--white);font-weight:900;">→</span>
+        </div>
+        <div style="font-family:var(--font-heading);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--teal-light);margin-bottom:var(--sp-2);">Teal — Secondary + Icons</div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--ash);line-height:1.6;font-weight:300;">Checkmarks, expand buttons, secondary CTAs, icon circles, subtitle text on dark. The 20% structural color.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-lg);padding:var(--sp-6) var(--sp-5);text-align:center;">
+        <div style="width:48px;height:48px;border-radius:var(--r-md);background:var(--frost);margin:0 auto var(--sp-3);display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:var(--font-display);font-size:18px;color:var(--ink);font-weight:900;">75</span>
+        </div>
+        <div style="font-family:var(--font-heading);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ash);margin-bottom:var(--sp-2);">Neutrals — Foundation</div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--ash);line-height:1.6;font-weight:300;">Backgrounds, body text, borders, shadows. Cool blue-gray from Ink to Snow. The 75% that keeps everything calm.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 09 — RULES ═══ -->
+<div class="section section--navy">
+  <div class="section-inner">
+    <div class="section-number">09</div>
+    <div class="section-label" style="color:var(--coral-light);">Rules</div>
+    <h2 class="section-title" style="color:var(--cloud);">Design <em>Principles</em></h2>
+    <div class="num-list" style="margin-top:var(--sp-5);">
+      <div class="num-item"><div class="num-item-number">01</div><div><div class="num-item-title">75/20/5 — Always</div><div class="num-item-text">75% neutrals, 20% teal, 5% coral. If coral is appearing on more than labels, buttons, and accent words, something is wrong. Teal handles a lean middle layer — icon circles, secondary buttons, checkmarks. It should feel present but never dominant.</div></div></div>
+      <div class="num-item"><div class="num-item-number">02</div><div><div class="num-item-title">Poppins Black Commands, Instrument Narrates</div><div class="num-item-text">Poppins at 900 weight, 36px and above. Instrument Serif italic between 18px and 32px. They never appear at the same size. Poppins 800 for H1, 500 for labels, 300 for body.</div></div></div>
+      <div class="num-item"><div class="num-item-number">03</div><div><div class="num-item-title">Never Two Alike in a Row</div><div class="num-item-text">Alternate section backgrounds: White, Navy, Frost, Ink, Steel, Cloud. Every scroll should land on a surface change.</div></div></div>
+      <div class="num-item"><div class="num-item-number">04</div><div><div class="num-item-title">Contrast Is Law</div><div class="num-item-text">All informational text requires a minimum color contrast of 4.5:1 for small text (&lt;24px) and 3:1 for large text (24px+ or 19px+ bold). Silver and Ash never carry text on light surfaces. On dark surfaces, Ash is the body default — not Silver, not Pewter. Decorative elements like ghosted section numbers are exempt.</div></div></div>
+      <div class="num-item"><div class="num-item-number">05</div><div><div class="num-item-title">Clickable Means Contained</div><div class="num-item-text">Every interactive element uses at least two affordance signals: container shape, distinct color, and a hover state. The only exception is underlined text links.</div></div></div>
+      <div class="num-item"><div class="num-item-number">06</div><div><div class="num-item-title">Italics Mean Something</div><div class="num-item-text">In headlines, italic Instrument Serif connector words are prepositions — "for," "the," "and." In body text, Poppins 300 italic signals the one phrase worth remembering.</div></div></div>
+      <div class="num-item"><div class="num-item-number">07</div><div><div class="num-item-title">Asymmetry Over Symmetry</div><div class="num-item-text">Default to 60/40 grids. Use tall-span cards to break monotony. Perfectly centered layouts feel generic; weighted layouts feel designed.</div></div></div>
+      <div class="num-item"><div class="num-item-number">08</div><div><div class="num-item-title">Three Voices Maximum Per Block</div><div class="num-item-text">No text block should use more than three typographic treatments — one display, one supporting, one body. Instrument Serif italic may only appear in one color per block. If the headline uses coral Instrument Serif ("Datacenter Dominance"), the subtitle must drop to Poppins 300 italic in a neutral — never a second Instrument Serif in teal. Stacking two colored serifs makes the eye bounce instead of flow.</div></div></div>
+      <div class="num-item"><div class="num-item-number">09</div><div><div class="num-item-title">The Number Is the Ornament</div><div class="num-item-text">Leading-zero Poppins Black numbers in display weight replace decorative icons. On light surfaces, numbers use Pewter or darker. On dark surfaces, Navy Light.</div></div></div>
+      <div class="num-item"><div class="num-item-number">10</div><div><div class="num-item-title">One Coral Per Section</div><div class="num-item-text">Never mix Coral (#ED5E11), Coral Deep (#C4341A), Coral Mid (#FE6B18), and Coral Light (#FF8F50) in the same section or slide. Pick one and commit. Mixing coral values creates visual noise that reads as indecision, not variety. On dark surfaces, use Coral Light only. On light surfaces, use Coral or Coral Deep only. The accent is the accent — it works because there is exactly one.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 10 — MOTION ═══ -->
+<div class="section section--frost">
+  <div class="section-inner">
+    <div class="section-number">10</div>
+    <div class="section-label">Motion</div>
+    <h2 class="section-title">Movement <em>with</em> Intention</h2>
+    <p class="demo-body" style="margin-bottom:var(--sp-7);">Motion is never decorative — it communicates hierarchy, confirms actions, and guides attention. Every animation answers one question: "what just happened?" If it doesn't clarify something, remove it. The system uses four easing curves and five duration tiers, and every element follows predictable stagger rules so the interface feels composed rather than chaotic.</p>
+
+    <!-- ── EASING CURVES ── -->
+    <div class="demo-h3" style="margin-bottom:var(--sp-3);">Four Easing Curves</div>
+    <p style="font-size:14px;color:var(--slate);line-height:1.7;font-weight:300;max-width:640px;margin-bottom:var(--sp-5);">Each curve has a role. Mixing them — using a spring where an expo belongs — feels as wrong as putting Coral on a secondary button. Hover over each track to preview the curve.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);margin-bottom:var(--sp-7);">
+      <!-- Out Expo -->
+      <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-2);">
+          <div class="demo-h3" style="color:var(--charcoal);font-size:12px;">Out Expo</div>
+          <div class="demo-caption" style="color:var(--pewter);">DEFAULT</div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);line-height:1.6;font-weight:300;margin-bottom:var(--sp-4);">The workhorse. Fast start, gentle landing. Use for entrances, reveals, page transitions, and any element moving into its resting position. Feels swift without being jarring.</div>
+        <div class="easing-demo-container" id="demo-expo">
+          <div class="easing-demo-track"></div>
+          <div class="easing-demo-dot" style="background:var(--coral);transition-timing-function:cubic-bezier(0.16, 1, 0.3, 1);transition-duration:500ms;"></div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:400;font-family:monospace;">cubic-bezier(0.16, 1, 0.3, 1)</div>
+      </div>
+
+      <!-- Out Quart -->
+      <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-2);">
+          <div class="demo-h3" style="color:var(--charcoal);font-size:12px;">Out Quart</div>
+          <div class="demo-caption" style="color:var(--pewter);">SUBTLE</div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);line-height:1.6;font-weight:300;margin-bottom:var(--sp-4);">Softer deceleration. Use for hover states, color changes, opacity fades, and small positional shifts where the motion should feel effortless rather than decisive.</div>
+        <div class="easing-demo-container" id="demo-quart">
+          <div class="easing-demo-track"></div>
+          <div class="easing-demo-dot" style="background:var(--teal);transition-timing-function:cubic-bezier(0.25, 1, 0.5, 1);transition-duration:500ms;"></div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:400;font-family:monospace;">cubic-bezier(0.25, 1, 0.5, 1)</div>
+      </div>
+
+      <!-- In-Out Quart -->
+      <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-2);">
+          <div class="demo-h3" style="color:var(--charcoal);font-size:12px;">In-Out Quart</div>
+          <div class="demo-caption" style="color:var(--pewter);">SYMMETRIC</div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);line-height:1.6;font-weight:300;margin-bottom:var(--sp-4);">Slow start, fast middle, slow finish. Use only for looping animations, loading states, and elements that move continuously. Never for user-triggered transitions.</div>
+        <div class="easing-demo-container" id="demo-inout">
+          <div class="easing-demo-track"></div>
+          <div class="easing-demo-dot" style="background:var(--slate);transition-timing-function:cubic-bezier(0.76, 0, 0.24, 1);transition-duration:500ms;"></div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:400;font-family:monospace;">cubic-bezier(0.76, 0, 0.24, 1)</div>
+      </div>
+
+      <!-- Spring -->
+      <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:var(--sp-2);">
+          <div class="demo-h3" style="color:var(--charcoal);font-size:12px;">Spring</div>
+          <div class="demo-caption" style="color:var(--coral);">ACCENT ONLY</div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);line-height:1.6;font-weight:300;margin-bottom:var(--sp-4);">Overshoots then settles. Use sparingly — toggle switches, success confirmations, and playful micro-interactions. More than two springs visible simultaneously feels amateurish.</div>
+        <div class="easing-demo-container" id="demo-spring">
+          <div class="easing-demo-track"></div>
+          <div class="easing-demo-dot" style="background:var(--coral-mid);transition-timing-function:cubic-bezier(0.34, 1.56, 0.64, 1);transition-duration:500ms;"></div>
+        </div>
+        <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:400;font-family:monospace;">cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+      </div>
+    </div>
+
+    <!-- ── DURATION SCALE ── -->
+    <div class="demo-h3" style="margin-bottom:var(--sp-3);">Five Duration Tiers</div>
+    <p style="font-size:14px;color:var(--slate);line-height:1.7;font-weight:300;max-width:640px;margin-bottom:var(--sp-5);">Duration maps to distance and importance. Small elements move fast; large layout shifts move slow. Nothing under 100ms (perceived as instant) and nothing over 800ms (feels sluggish). Click each bar to preview.</p>
+
+    <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);">
+      <div style="display:grid;gap:var(--sp-4);">
+        <!-- Instant -->
+        <div style="display:grid;grid-template-columns:120px 80px 1fr;gap:var(--sp-4);align-items:center;">
+          <div class="demo-h3" style="font-size:11px;color:var(--charcoal);">Instant</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--pewter);">100ms</div>
+          <div style="position:relative;">
+            <div style="height:8px;background:var(--frost);border-radius:4px;overflow:hidden;">
+              <div class="duration-bar" style="width:12.5%;height:100%;background:var(--coral);border-radius:4px;"></div>
+            </div>
+            <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:300;margin-top:4px;">Button color, icon swap, checkbox toggle</div>
+          </div>
+        </div>
+        <!-- Fast -->
+        <div style="display:grid;grid-template-columns:120px 80px 1fr;gap:var(--sp-4);align-items:center;">
+          <div class="demo-h3" style="font-size:11px;color:var(--charcoal);">Fast</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--pewter);">200ms</div>
+          <div style="position:relative;">
+            <div style="height:8px;background:var(--frost);border-radius:4px;overflow:hidden;">
+              <div class="duration-bar" style="width:25%;height:100%;background:var(--coral);border-radius:4px;"></div>
+            </div>
+            <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:300;margin-top:4px;">Tooltip, hover lift, small fade-in</div>
+          </div>
+        </div>
+        <!-- Normal -->
+        <div style="display:grid;grid-template-columns:120px 80px 1fr;gap:var(--sp-4);align-items:center;">
+          <div class="demo-h3" style="font-size:11px;color:var(--charcoal);">Normal</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--pewter);">350ms</div>
+          <div style="position:relative;">
+            <div style="height:8px;background:var(--frost);border-radius:4px;overflow:hidden;">
+              <div class="duration-bar" style="width:43.75%;height:100%;background:var(--teal);border-radius:4px;"></div>
+            </div>
+            <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:300;margin-top:4px;">Card entrance, dropdown open, modal appear</div>
+          </div>
+        </div>
+        <!-- Slow -->
+        <div style="display:grid;grid-template-columns:120px 80px 1fr;gap:var(--sp-4);align-items:center;">
+          <div class="demo-h3" style="font-size:11px;color:var(--charcoal);">Slow</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--pewter);">500ms</div>
+          <div style="position:relative;">
+            <div style="height:8px;background:var(--frost);border-radius:4px;overflow:hidden;">
+              <div class="duration-bar" style="width:62.5%;height:100%;background:var(--teal);border-radius:4px;"></div>
+            </div>
+            <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:300;margin-top:4px;">Page transition, section reveal on scroll, layout reflow</div>
+          </div>
+        </div>
+        <!-- Dramatic -->
+        <div style="display:grid;grid-template-columns:120px 80px 1fr;gap:var(--sp-4);align-items:center;">
+          <div class="demo-h3" style="font-size:11px;color:var(--charcoal);">Dramatic</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--pewter);">800ms</div>
+          <div style="position:relative;">
+            <div style="height:8px;background:var(--frost);border-radius:4px;overflow:hidden;">
+              <div class="duration-bar" style="width:100%;height:100%;background:var(--slate);border-radius:4px;"></div>
+            </div>
+            <div style="font-family:var(--font-body);font-size:11px;color:var(--pewter);font-weight:300;margin-top:4px;">Hero entrance, cover animation, onboarding sequence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STAGGER ── -->
+    <div style="margin-top:var(--sp-7);">
+      <div class="demo-h3" style="margin-bottom:var(--sp-3);">Stagger Pattern — 60ms Steps</div>
+      <p style="font-size:14px;color:var(--slate);line-height:1.7;font-weight:300;max-width:640px;margin-bottom:var(--sp-5);">When multiple elements enter together — list items, cards, stat numbers — each one delays by 60ms after the previous. This creates a cascade that reads as composed rather than simultaneous. Cap at 6 items (360ms total delay); beyond that, batch into groups. Hover to preview.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);">
+        <!-- Stagger: Bar chart -->
+        <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);text-align:center;">
+          <div class="demo-caption" style="margin-bottom:var(--sp-4);color:var(--slate);">Staggered Bar Entrance</div>
+          <div class="stagger-demo" id="stagger-bars">
+            <div class="stagger-bar" style="height:65px;background:var(--teal-pale);transition:transform 350ms cubic-bezier(0.16,1,0.3,1) 0ms, opacity 350ms cubic-bezier(0.16,1,0.3,1) 0ms;"></div>
+            <div class="stagger-bar" style="height:50px;background:var(--teal-light);transition:transform 350ms cubic-bezier(0.16,1,0.3,1) 60ms, opacity 350ms cubic-bezier(0.16,1,0.3,1) 60ms;"></div>
+            <div class="stagger-bar" style="height:75px;background:var(--teal-mid);transition:transform 350ms cubic-bezier(0.16,1,0.3,1) 120ms, opacity 350ms cubic-bezier(0.16,1,0.3,1) 120ms;"></div>
+            <div class="stagger-bar" style="height:55px;background:var(--teal);transition:transform 350ms cubic-bezier(0.16,1,0.3,1) 180ms, opacity 350ms cubic-bezier(0.16,1,0.3,1) 180ms;"></div>
+            <div class="stagger-bar" style="height:80px;background:var(--coral);transition:transform 350ms cubic-bezier(0.16,1,0.3,1) 240ms, opacity 350ms cubic-bezier(0.16,1,0.3,1) 240ms;"></div>
+            <div class="stagger-bar" style="height:60px;background:var(--teal-deep);transition:transform 350ms cubic-bezier(0.16,1,0.3,1) 300ms, opacity 350ms cubic-bezier(0.16,1,0.3,1) 300ms;"></div>
+          </div>
+          <div style="font-family:monospace;font-size:11px;color:var(--pewter);margin-top:var(--sp-3);">delay: n × 60ms · duration: 350ms · ease-out-expo</div>
+        </div>
+
+        <!-- Stagger: Fade up -->
+        <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-6);border:1px solid var(--cloud);text-align:center;">
+          <div class="demo-caption" style="margin-bottom:var(--sp-4);color:var(--slate);">Staggered Fade-Up Entrance</div>
+          <div class="reveal-demo-container" id="reveal-demo">
+            <div class="reveal-demo-item" style="top:10px;transition-duration:350ms;transition-timing-function:cubic-bezier(0.16,1,0.3,1);transition-delay:0ms;">
+              <div style="font-family:var(--font-display);font-size:32px;font-weight:900;color:var(--ink);">$4.24T</div>
+              <div style="font-family:var(--font-heading);font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--pewter);">Market Cap</div>
+            </div>
+            <div class="reveal-demo-item" style="top:10px;left:calc(50% + 100px);transition-duration:350ms;transition-timing-function:cubic-bezier(0.16,1,0.3,1);transition-delay:60ms;">
+              <div style="font-family:var(--font-display);font-size:32px;font-weight:900;color:var(--ink);">75.0%</div>
+              <div style="font-family:var(--font-heading);font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--pewter);">Gross Margin</div>
+            </div>
+            <div class="reveal-demo-item" style="top:10px;left:calc(50% - 100px);transition-duration:350ms;transition-timing-function:cubic-bezier(0.16,1,0.3,1);transition-delay:120ms;">
+              <div style="font-family:var(--font-display);font-size:32px;font-weight:900;color:var(--ink);">35.7x</div>
+              <div style="font-family:var(--font-heading);font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--pewter);">P/E Ratio</div>
+            </div>
+          </div>
+          <div style="font-family:monospace;font-size:11px;color:var(--pewter);margin-top:var(--sp-3);">translateY(20px) → 0 · opacity 0 → 1 · stagger 60ms</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MOTION RULES ── -->
+    <div style="margin-top:var(--sp-7);padding-top:var(--sp-6);border-top:1px solid var(--cloud);">
+      <div class="demo-h3" style="margin-bottom:var(--sp-5);">Seven Motion Rules</div>
+      <div class="num-list">
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">01</div>
+          <div>
+            <div class="num-item-title">Enter with Out-Expo, Exit with Out-Quart</div>
+            <div class="num-item-text">Elements arriving should feel decisive (expo). Elements leaving should feel effortless (quart). This asymmetry mirrors how we pay more attention to what appears than what disappears.</div>
+          </div>
+        </div>
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">02</div>
+          <div>
+            <div class="num-item-title">Duration Maps to Distance</div>
+            <div class="num-item-text">A button changing color (0px travel) gets 100ms. A card sliding 200px gets 350ms. A full-page transition gets 500ms. The eye needs proportionally more time to track longer journeys.</div>
+          </div>
+        </div>
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">03</div>
+          <div>
+            <div class="num-item-title">Stagger at 60ms, Cap at 6</div>
+            <div class="num-item-text">Sequential element delays use 60ms steps. Beyond 6 items (360ms total), batch the remainder as a group — users stop perceiving individual entrances past that point.</div>
+          </div>
+        </div>
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">04</div>
+          <div>
+            <div class="num-item-title">Fade-Up Is the Default Entrance</div>
+            <div class="num-item-text">Elements enter from 16–24px below their final position while fading from 0 to 1 opacity. This upward movement implies "rising to attention." Lateral entrances are reserved for navigation or slide-like transitions only.</div>
+          </div>
+        </div>
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">05</div>
+          <div>
+            <div class="num-item-title">Spring Is Coral-Level Rare</div>
+            <div class="num-item-text">Like the coral accent at 5%, spring easing is the rarest motion — used only for toggle switches, success states, and playful micro-interactions. Two visible springs at once is the hard ceiling.</div>
+          </div>
+        </div>
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">06</div>
+          <div>
+            <div class="num-item-title">Respect prefers-reduced-motion</div>
+            <div class="num-item-text">When the user's OS requests reduced motion, collapse all transitions to instant (0ms duration) and remove all transforms. Opacity changes may remain. Accessibility is not optional.</div>
+          </div>
+        </div>
+        <div class="num-item">
+          <div class="num-item-number" style="color:var(--teal-pale);">07</div>
+          <div>
+            <div class="num-item-title">The Serif Word Arrives Last</div>
+            <div class="num-item-text">In the mixed headline pattern, the italic Instrument Serif connector word fades in 120ms after the Poppins text. This delay reinforces the typographic hierarchy — the structural word establishes, the editorial word narrates.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CSS TOKEN REFERENCE ── -->
+    <div style="margin-top:var(--sp-7);padding-top:var(--sp-6);border-top:1px solid var(--cloud);">
+      <div class="demo-h3" style="margin-bottom:var(--sp-3);">CSS Custom Property Reference</div>
+      <p style="font-size:14px;color:var(--slate);line-height:1.7;font-weight:300;max-width:640px;margin-bottom:var(--sp-5);">All motion values are defined as CSS custom properties in <span style="font-family:monospace;font-size:13px;color:var(--graphite);">:root</span>. Use these tokens — never raw values — so the entire system can be tuned from one place.</p>
+
+      <div style="background:var(--white);border-radius:var(--r-lg);padding:var(--sp-5);border:1px solid var(--cloud);font-family:monospace;font-size:13px;line-height:2.2;color:var(--slate);">
+        <span style="color:var(--pewter);">/* Easing */</span><br/>
+        <span style="color:var(--teal);">--ease-out-expo</span>: cubic-bezier(0.16, 1, 0.3, 1);<br/>
+        <span style="color:var(--teal);">--ease-out-quart</span>: cubic-bezier(0.25, 1, 0.5, 1);<br/>
+        <span style="color:var(--teal);">--ease-in-out-quart</span>: cubic-bezier(0.76, 0, 0.24, 1);<br/>
+        <span style="color:var(--teal);">--spring</span>: cubic-bezier(0.34, 1.56, 0.64, 1);<br/>
+        <br/>
+        <span style="color:var(--pewter);">/* Duration */</span><br/>
+        <span style="color:var(--coral);">--duration-instant</span>: 100ms;<br/>
+        <span style="color:var(--coral);">--duration-fast</span>: 200ms;<br/>
+        <span style="color:var(--coral);">--duration-normal</span>: 350ms;<br/>
+        <span style="color:var(--coral);">--duration-slow</span>: 500ms;<br/>
+        <span style="color:var(--coral);">--duration-dramatic</span>: 800ms;<br/>
+        <br/>
+        <span style="color:var(--pewter);">/* Stagger */</span><br/>
+        <span style="color:var(--graphite);">--stagger-step</span>: 60ms;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div style="background:var(--ink);padding:var(--sp-7);text-align:center;">
+  <div class="slash-list" style="justify-content:center;color:var(--pewter);">
+    <span>Design System v1.5</span><span class="slash-sep" style="color:var(--graphite);">·</span>
+    <span>Poppins Black + Instrument Serif + Poppins</span><span class="slash-sep" style="color:var(--graphite);">·</span>
+    <span>April 2026</span>
+  </div>
+</div>
+
+<script>
+  // Interactive easing demos — click to replay
+  document.querySelectorAll('.easing-demo-container').forEach(el => {
+    el.addEventListener('click', () => {
+      const dot = el.querySelector('.easing-demo-dot');
+      dot.style.transition = 'none';
+      dot.style.left = '0';
+      void dot.offsetWidth;
+      dot.style.transition = '';
+      el.classList.add('playing');
+      setTimeout(() => el.classList.remove('playing'), 600);
+    });
+  });
+
+  // Stagger bar demo
+  const staggerBars = document.getElementById('stagger-bars');
+  if (staggerBars) {
+    staggerBars.addEventListener('click', () => {
+      const bars = staggerBars.querySelectorAll('.stagger-bar');
+      bars.forEach(b => { b.style.transition = 'none'; b.style.transform = 'scaleY(0.15)'; b.style.opacity = '0.3'; });
+      void staggerBars.offsetWidth;
+      bars.forEach(b => b.style.transition = '');
+      staggerBars.classList.add('playing');
+      setTimeout(() => staggerBars.classList.remove('playing'), 800);
+    });
+  }
+
+  // Reveal demo
+  const revealDemo = document.getElementById('reveal-demo');
+  if (revealDemo) {
+    revealDemo.addEventListener('click', () => {
+      const items = revealDemo.querySelectorAll('.reveal-demo-item');
+      items.forEach(i => { i.style.transition = 'none'; i.style.transform = 'translate(-50%, 30px)'; i.style.opacity = '0'; });
+      void revealDemo.offsetWidth;
+      items.forEach(i => i.style.transition = '');
+      revealDemo.classList.add('playing');
+      setTimeout(() => revealDemo.classList.remove('playing'), 800);
+    });
+  }
+</script>
+
+</body>
+</html>

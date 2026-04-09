@@ -33,7 +33,7 @@ export default function App() {
           </Link>
 
           {/* 03 — Design Anything */}
-          <a className="card" href="/presentation.html">
+          <a className="card" href="/design-system.html">
             <div className="card-number">03</div>
             <div className="card-title">Develop an advanced design system</div>
             <div className="card-desc">Build polished visual systems, component libraries, and brand-consistent interfaces — the same design thinking behind professional products.</div>
