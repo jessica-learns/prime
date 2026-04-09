@@ -76,6 +76,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
+      max-height: 100vh;
       display: flex;
       flex-direction: column;
       opacity: 0;
@@ -132,6 +133,7 @@
       justify-content: center;
       padding: 56px 80px 32px;
       overflow: hidden;
+      min-height: 0;
     }
 
     /* Bottom bar */
@@ -140,8 +142,9 @@
       padding: 16px 80px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       flex-shrink: 0;
+      position: relative;
     }
 
     .bbar p {
@@ -158,12 +161,15 @@
       font-weight: 500;
       letter-spacing: 0.15em;
       color: var(--pewter);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     /* Fixed slide navigation */
     .slide-nav {
       position: fixed;
-      bottom: 16px;
+      bottom: 12px;
       right: 24px;
       display: flex;
       align-items: center;
@@ -195,6 +201,16 @@
       border-color: rgba(255,255,255,0.35);
       color: var(--white);
       transform: scale(1.1);
+    }
+    .slide-nav a.nav-home {
+      border-color: var(--teal-mid);
+      background: rgba(1,107,131,0.4);
+      color: var(--teal-light);
+    }
+    .slide-nav a.nav-home:hover {
+      background: rgba(1,107,131,0.7);
+      border-color: var(--teal-light);
+      color: var(--white);
     }
     .slide-nav svg {
       width: 16px;
@@ -715,7 +731,7 @@
     .j-name {
       font-family: var(--font-body);
       font-weight: 700;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--ink);
       margin-top: 12px;
       text-align: center;
@@ -724,7 +740,7 @@
     .j-desc {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--pewter);
       margin-top: 4px;
       text-align: center;
@@ -862,7 +878,7 @@
     .bq cite {
       font-family: var(--font-body);
       font-style: normal;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--pewter);
       display: block;
@@ -1694,17 +1710,17 @@
         <div style="display:flex;gap:24px;margin-top:14px;justify-content:center;" class="anim d3">
           <div style="display:flex;align-items:center;gap:8px;">
             <div style="width:14px;height:14px;border-radius:3px;background:var(--teal);opacity:0.6;"></div>
-            <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);"><strong>Efficient</strong> —
+            <div style="font-family:var(--font-body);font-size:15px;color:var(--slate);"><strong>Efficient</strong> —
               .md .txt .csv .py</div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
             <div style="width:14px;height:14px;border-radius:3px;background:var(--pewter);opacity:0.6;"></div>
-            <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);"><strong>Moderate</strong> —
+            <div style="font-family:var(--font-body);font-size:15px;color:var(--slate);"><strong>Moderate</strong> —
               .docx .html .xlsx</div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;">
             <div style="width:14px;height:14px;border-radius:3px;background:var(--coral);opacity:0.6;"></div>
-            <div style="font-family:var(--font-body);font-size:13px;color:var(--slate);"><strong>Expensive</strong> —
+            <div style="font-family:var(--font-body);font-size:15px;color:var(--slate);"><strong>Expensive</strong> —
               .pdf .pptx .jpg .svg</div>
           </div>
         </div>
@@ -1932,7 +1948,7 @@
               style="width:100%;max-height:50vh;object-fit:contain;display:block;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.1);border:1px solid var(--mist);"
               alt="Broadstreet Pro — Sources and Evidence Trail">
             <div
-              style="font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--slate);margin-top:12px;text-align:center;">
+              style="font-family:var(--font-body);font-size:15px;font-weight:500;color:var(--slate);margin-top:12px;text-align:center;">
               62 citations · 19 derived calculations · 39 transcript references</div>
           </div>
         </div>
@@ -2117,7 +2133,7 @@
               <div style="font-family:var(--font-body);font-weight:700;font-size:16px;color:var(--ink);">MVP scope in
                 minutes</div>
               <div
-                style="font-family:var(--font-body);font-size:14px;font-weight:300;color:var(--slate);line-height:1.5;">
+                style="font-family:var(--font-body);font-size:16px;font-weight:300;color:var(--slate);line-height:1.5;">
                 Three screens. What's in, what's explicitly out. No feature creep.</div>
             </div>
           </div>
@@ -2137,7 +2153,7 @@
               <div style="font-family:var(--font-body);font-weight:700;font-size:16px;color:var(--ink);">Data model in
                 plain English</div>
               <div
-                style="font-family:var(--font-body);font-size:14px;font-weight:300;color:var(--slate);line-height:1.5;">
+                style="font-family:var(--font-body);font-size:16px;font-weight:300;color:var(--slate);line-height:1.5;">
                 What your app stores, described simply — no SQL, no diagrams yet.</div>
             </div>
           </div>
@@ -2154,7 +2170,7 @@
               <div style="font-family:var(--font-body);font-weight:700;font-size:16px;color:var(--ink);">AI integration
                 plan</div>
               <div
-                style="font-family:var(--font-body);font-size:14px;font-weight:300;color:var(--slate);line-height:1.5;">
+                style="font-family:var(--font-body);font-size:16px;font-weight:300;color:var(--slate);line-height:1.5;">
                 Which model, when it fires, what goes in, what comes out.</div>
             </div>
           </div>
@@ -2171,7 +2187,7 @@
               <div style="font-family:var(--font-body);font-weight:700;font-size:16px;color:var(--ink);">Timeline with
                 milestones</div>
               <div
-                style="font-family:var(--font-body);font-size:14px;font-weight:300;color:var(--slate);line-height:1.5;">
+                style="font-family:var(--font-body);font-size:16px;font-weight:300;color:var(--slate);line-height:1.5;">
                 Week-by-week deliverables matched to your deadline, with risk flags.</div>
             </div>
           </div>
@@ -2203,7 +2219,7 @@
               style="font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-top:4px;">
               Accounts</div>
             <div
-              style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--pewter);margin-top:4px;">
+              style="font-family:var(--font-body);font-size:15px;font-weight:300;color:var(--pewter);margin-top:4px;">
               GitHub, Supabase, Vercel, Railway, AI API, IDE</div>
           </div>
           <div
@@ -2215,7 +2231,7 @@
               style="font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-top:4px;">
               Cost</div>
             <div
-              style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--pewter);margin-top:4px;">
+              style="font-family:var(--font-body);font-size:15px;font-weight:300;color:var(--pewter);margin-top:4px;">
               Every tool has a free tier generous enough for your project</div>
           </div>
           <div
@@ -2227,7 +2243,7 @@
               style="font-family:var(--font-body);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--slate);margin-top:4px;">
               Setup Time</div>
             <div
-              style="font-family:var(--font-body);font-size:13px;font-weight:300;color:var(--pewter);margin-top:4px;">
+              style="font-family:var(--font-body);font-size:15px;font-weight:300;color:var(--pewter);margin-top:4px;">
               Start building features on day one instead of day three</div>
           </div>
         </div>
@@ -2647,7 +2663,7 @@
     <button id="nav-prev" title="Previous slide">
       <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
-    <a href="/" title="Home">
+    <a href="/" title="Home" class="nav-home">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </a>
     <button id="nav-next" title="Next slide">
