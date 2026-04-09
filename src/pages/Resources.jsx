@@ -10,6 +10,24 @@ export default function Resources() {
       display: 'flex',
       flexDirection: 'column',
     }}>
+      {/* Fixed Home Nav */}
+      <Link to="/" title="Home" style={{
+        position: 'fixed', bottom: 12, right: 24, zIndex: 200,
+        width: 36, height: 36, borderRadius: '50%',
+        border: '1px solid #0891B2',
+        background: 'rgba(1,107,131,0.4)',
+        backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        textDecoration: 'none', color: '#36B5CE',
+        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+      }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(1,107,131,0.7)'; e.currentTarget.style.borderColor = '#36B5CE'; e.currentTarget.style.color = '#FFFFFF'; e.currentTarget.style.transform = 'scale(1.1)'; }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(1,107,131,0.4)'; e.currentTarget.style.borderColor = '#0891B2'; e.currentTarget.style.color = '#36B5CE'; e.currentTarget.style.transform = 'scale(1)'; }}
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </Link>
       {/* Nav */}
       <nav style={{
         padding: '24px 48px',
