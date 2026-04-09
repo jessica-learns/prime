@@ -10,8 +10,8 @@ export default function App() {
         <div className="label">WHAT YOU'LL WALK AWAY WITH</div>
         <h1 className="headline">
           Skills that compound.<br />
-          Achieve goals faster and produce<br />
-          <em>higher-quality work.</em>
+          Achieve goals faster and<br />
+          produce <em>higher-quality work.</em>
         </h1>
 
         <div className="card-grid">
